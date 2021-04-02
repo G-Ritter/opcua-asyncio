@@ -160,7 +160,7 @@ class UaProcessor:
         else:
             user = self.session.user
             if self._connection.security_policy.permissions is not None:
-                if self._connection.security_policy.permissions.check_validity(user, typeid, body) is False:
+                if await self._connection.security_policy.permissions.check_validity(user, typeid, body) is False:
                     raise ua.uaerrors.BadUserAccessDenied
 
         if typeid == ua.NodeId(ua.ObjectIds.CreateSessionRequest_Encoding_DefaultBinary):

@@ -42,7 +42,7 @@ class PermissionRuleset:
     Base class for permission ruleset
     """
 
-    def check_validity(self, user, action_type, body):
+    async def check_validity(self, user, action_type, body):
         raise NotImplementedError
 
 
@@ -61,7 +61,7 @@ class SimpleRoleRuleset(PermissionRuleset):
             UserRole.Anonymous: set()
         }
 
-    def check_validity(self, user, action_type_id, body):
+    async def check_validity(self, user, action_type_id, body):
         if action_type_id in self._permission_dict[user.role]:
             return True
         else:
